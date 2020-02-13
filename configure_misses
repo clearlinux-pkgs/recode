@@ -1,0 +1,5 @@
+Configure miss: __fseterr
+Configure miss: crtdefs.h
+Configure miss: whether printf supports the 'n' directive
+Configure miss: whether -Wno-missing-field-initializers is needed
+Configure miss: if malloc debugging is wanted
