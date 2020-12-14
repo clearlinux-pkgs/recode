@@ -4,7 +4,7 @@
 #
 Name     : recode
 Version  : 3.7.8
-Release  : 3
+Release  : 4
 URL      : https://github.com/rrthomas/recode/releases/download/v3.7.8/recode-3.7.8.tar.gz
 Source0  : https://github.com/rrthomas/recode/releases/download/v3.7.8/recode-3.7.8.tar.gz
 Summary  : No detailed summary available
