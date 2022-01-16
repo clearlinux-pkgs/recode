@@ -4,7 +4,7 @@
 #
 Name     : recode
 Version  : 3.7.9
-Release  : 6
+Release  : 7
 URL      : https://github.com/rrthomas/recode/releases/download/v3.7.9/recode-3.7.9.tar.gz
 Source0  : https://github.com/rrthomas/recode/releases/download/v3.7.9/recode-3.7.9.tar.gz
 Summary  : No detailed summary available
@@ -16,9 +16,9 @@ Requires: recode-lib = %{version}-%{release}
 Requires: recode-license = %{version}-%{release}
 Requires: recode-locales = %{version}-%{release}
 Requires: recode-man = %{version}-%{release}
-BuildRequires : Cython
 BuildRequires : flex
 BuildRequires : glibc-locale
+BuildRequires : pypi-cython
 BuildRequires : python3-dev
 
 %description
@@ -103,15 +103,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1622652760
+export SOURCE_DATE_EPOCH=1642369828
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -123,7 +123,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1622652760
+export SOURCE_DATE_EPOCH=1642369828
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/recode
 cp %{_builddir}/recode-3.7.9/COPYING %{buildroot}/usr/share/package-licenses/recode/8624bcdae55baeef00cd11d5dfcfa60f68710a02
