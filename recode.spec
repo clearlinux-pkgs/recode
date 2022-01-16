@@ -4,13 +4,14 @@
 #
 Name     : recode
 Version  : 3.7.9
-Release  : 7
+Release  : 8
 URL      : https://github.com/rrthomas/recode/releases/download/v3.7.9/recode-3.7.9.tar.gz
 Source0  : https://github.com/rrthomas/recode/releases/download/v3.7.9/recode-3.7.9.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0 LGPL-3.0
 Requires: recode-bin = %{version}-%{release}
+Requires: recode-filemap = %{version}-%{release}
 Requires: recode-info = %{version}-%{release}
 Requires: recode-lib = %{version}-%{release}
 Requires: recode-license = %{version}-%{release}
@@ -36,6 +37,7 @@ The *recode* program is a handy front-end to the library.
 Summary: bin components for the recode package.
 Group: Binaries
 Requires: recode-license = %{version}-%{release}
+Requires: recode-filemap = %{version}-%{release}
 
 %description bin
 bin components for the recode package.
@@ -53,6 +55,14 @@ Requires: recode = %{version}-%{release}
 dev components for the recode package.
 
 
+%package filemap
+Summary: filemap components for the recode package.
+Group: Default
+
+%description filemap
+filemap components for the recode package.
+
+
 %package info
 Summary: info components for the recode package.
 Group: Default
@@ -65,6 +75,7 @@ info components for the recode package.
 Summary: lib components for the recode package.
 Group: Libraries
 Requires: recode-license = %{version}-%{release}
+Requires: recode-filemap = %{version}-%{release}
 
 %description lib
 lib components for the recode package.
@@ -97,13 +108,19 @@ man components for the recode package.
 %prep
 %setup -q -n recode-3.7.9
 cd %{_builddir}/recode-3.7.9
+pushd ..
+cp -a recode-3.7.9 buildavx2
+popd
+pushd ..
+cp -a recode-3.7.9 buildavx512
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1642369828
+export SOURCE_DATE_EPOCH=1642370307
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -115,21 +132,53 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
+unset PKG_CONFIG_PATH
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
+%configure --disable-static
+make  %{?_smp_mflags}
+popd
+unset PKG_CONFIG_PATH
+pushd ../buildavx512/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=256 -Wl,-z,x86-64-v4"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=256 -Wl,-z,x86-64-v4"
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=256"
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=256"
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v4"
+%configure --disable-static
+make  %{?_smp_mflags}
+popd
 %check
 export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
+cd ../buildavx2;
+make %{?_smp_mflags} check || :
+cd ../buildavx512;
+make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1642369828
+export SOURCE_DATE_EPOCH=1642370307
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/recode
 cp %{_builddir}/recode-3.7.9/COPYING %{buildroot}/usr/share/package-licenses/recode/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 cp %{_builddir}/recode-3.7.9/COPYING-LIB %{buildroot}/usr/share/package-licenses/recode/f45ee1c765646813b442ca58de72e20a64a7ddba
+pushd ../buildavx2/
+%make_install_v3
+popd
+pushd ../buildavx512/
+%make_install_v4
+popd
 %make_install
 %find_lang recode
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx512 %{buildroot}-v4 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -137,12 +186,17 @@ cp %{_builddir}/recode-3.7.9/COPYING-LIB %{buildroot}/usr/share/package-licenses
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/recode
+/usr/share/clear/optimized-elf/bin*
 
 %files dev
 %defattr(-,root,root,-)
 /usr/include/recode.h
 /usr/include/recodext.h
 /usr/lib64/librecode.so
+
+%files filemap
+%defattr(-,root,root,-)
+/usr/share/clear/filemap/filemap-recode
 
 %files info
 %defattr(0644,root,root,0755)
@@ -152,6 +206,7 @@ cp %{_builddir}/recode-3.7.9/COPYING-LIB %{buildroot}/usr/share/package-licenses
 %defattr(-,root,root,-)
 /usr/lib64/librecode.so.3
 /usr/lib64/librecode.so.3.7.9
+/usr/share/clear/optimized-elf/lib*
 
 %files license
 %defattr(0644,root,root,0755)

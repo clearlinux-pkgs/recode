@@ -1,6 +1,18 @@
 Configure miss: __fseterr
+Configure miss: __fseterr
+Configure miss: __fseterr
+Configure miss: crtdefs.h
+Configure miss: crtdefs.h
 Configure miss: crtdefs.h
 Configure miss: cython3
+Configure miss: cython3
+Configure miss: cython3
+Configure miss: if malloc debugging is wanted
+Configure miss: if malloc debugging is wanted
 Configure miss: if malloc debugging is wanted
 Configure miss: whether -Wno-missing-field-initializers is needed
+Configure miss: whether -Wno-missing-field-initializers is needed
+Configure miss: whether -Wno-missing-field-initializers is needed
+Configure miss: whether printf supports the 'n' directive
+Configure miss: whether printf supports the 'n' directive
 Configure miss: whether printf supports the 'n' directive
