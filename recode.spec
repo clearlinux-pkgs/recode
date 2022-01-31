@@ -4,7 +4,7 @@
 #
 Name     : recode
 Version  : 3.7.9
-Release  : 9
+Release  : 10
 URL      : https://github.com/rrthomas/recode/releases/download/v3.7.9/recode-3.7.9.tar.gz
 Source0  : https://github.com/rrthomas/recode/releases/download/v3.7.9/recode-3.7.9.tar.gz
 Summary  : No detailed summary available
