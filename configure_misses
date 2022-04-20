@@ -1,18 +1,30 @@
 Configure miss: __fseterr
 Configure miss: __fseterr
 Configure miss: __fseterr
+Configure miss: compiler option needed when checking for declarations
+Configure miss: compiler option needed when checking for declarations
+Configure miss: compiler option needed when checking for declarations
 Configure miss: crtdefs.h
 Configure miss: crtdefs.h
 Configure miss: crtdefs.h
 Configure miss: cython3
 Configure miss: cython3
 Configure miss: cython3
-Configure miss: if malloc debugging is wanted
-Configure miss: if malloc debugging is wanted
-Configure miss: if malloc debugging is wanted
 Configure miss: whether -Wno-missing-field-initializers is needed
 Configure miss: whether -Wno-missing-field-initializers is needed
 Configure miss: whether -Wno-missing-field-initializers is needed
+Configure miss: whether ctype.h defines __header_inline
+Configure miss: whether ctype.h defines __header_inline
+Configure miss: whether ctype.h defines __header_inline
+Configure miss: whether mbrtowc stores incomplete characters
+Configure miss: whether mbrtowc stores incomplete characters
+Configure miss: whether mbrtowc stores incomplete characters
 Configure miss: whether printf supports the 'n' directive
 Configure miss: whether printf supports the 'n' directive
 Configure miss: whether printf supports the 'n' directive
+Configure miss: whether the compiler is clang
+Configure miss: whether the compiler is clang
+Configure miss: whether the compiler is clang
+Configure miss: whether the compiler produces multi-arch binaries
+Configure miss: whether the compiler produces multi-arch binaries
+Configure miss: whether the compiler produces multi-arch binaries
