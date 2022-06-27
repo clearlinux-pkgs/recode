@@ -4,7 +4,7 @@
 #
 Name     : recode
 Version  : 3.7.12
-Release  : 11
+Release  : 12
 URL      : https://github.com/rrthomas/recode/releases/download/v3.7.12/recode-3.7.12.tar.gz
 Source0  : https://github.com/rrthomas/recode/releases/download/v3.7.12/recode-3.7.12.tar.gz
 Summary  : No detailed summary available
@@ -120,7 +120,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1650423447
+export SOURCE_DATE_EPOCH=1656364822
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -164,7 +164,7 @@ cd ../buildavx512;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1650423447
+export SOURCE_DATE_EPOCH=1656364822
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/recode
 cp %{_builddir}/recode-3.7.12/COPYING %{buildroot}/usr/share/package-licenses/recode/8624bcdae55baeef00cd11d5dfcfa60f68710a02
@@ -177,8 +177,8 @@ pushd ../buildavx512/
 popd
 %make_install
 %find_lang recode
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
-/usr/bin/elf-move.py avx512 %{buildroot}-v4 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx512 %{buildroot}-v4 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -192,6 +192,8 @@ popd
 %defattr(-,root,root,-)
 /usr/include/recode.h
 /usr/include/recodext.h
+/usr/lib64/glibc-hwcaps/x86-64-v3/librecode.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/librecode.so
 /usr/lib64/librecode.so
 
 %files filemap
@@ -204,9 +206,12 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/glibc-hwcaps/x86-64-v3/librecode.so.3
+/usr/lib64/glibc-hwcaps/x86-64-v3/librecode.so.3.7.12
+/usr/lib64/glibc-hwcaps/x86-64-v4/librecode.so.3
+/usr/lib64/glibc-hwcaps/x86-64-v4/librecode.so.3.7.12
 /usr/lib64/librecode.so.3
 /usr/lib64/librecode.so.3.7.12
-/usr/share/clear/optimized-elf/lib*
 
 %files license
 %defattr(0644,root,root,0755)
