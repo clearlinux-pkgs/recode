@@ -4,7 +4,7 @@
 #
 Name     : recode
 Version  : 3.7.12
-Release  : 16
+Release  : 17
 URL      : https://github.com/rrthomas/recode/releases/download/v3.7.12/recode-3.7.12.tar.gz
 Source0  : https://github.com/rrthomas/recode/releases/download/v3.7.12/recode-3.7.12.tar.gz
 Summary  : No detailed summary available
@@ -120,7 +120,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656364822
+export SOURCE_DATE_EPOCH=1667438874
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -144,10 +144,10 @@ make  %{?_smp_mflags}
 popd
 unset PKG_CONFIG_PATH
 pushd ../buildavx512/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=256 -Wl,-z,x86-64-v4"
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=256 -Wl,-z,x86-64-v4"
-export FFLAGS="$FFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=256"
-export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=256"
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=512 -Wl,-z,x86-64-v4 -mtune=sapphirerapids "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=512 -Wl,-z,x86-64-v4 -mtune=sapphirerapids "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=512"
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=512"
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v4"
 %configure --disable-static
 make  %{?_smp_mflags}
@@ -164,11 +164,11 @@ cd ../buildavx512;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1656364822
+export SOURCE_DATE_EPOCH=1667438874
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/recode
-cp %{_builddir}/recode-3.7.12/COPYING %{buildroot}/usr/share/package-licenses/recode/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-cp %{_builddir}/recode-3.7.12/COPYING-LIB %{buildroot}/usr/share/package-licenses/recode/f45ee1c765646813b442ca58de72e20a64a7ddba
+cp %{_builddir}/recode-%{version}/COPYING %{buildroot}/usr/share/package-licenses/recode/8624bcdae55baeef00cd11d5dfcfa60f68710a02 || :
+cp %{_builddir}/recode-%{version}/COPYING-LIB %{buildroot}/usr/share/package-licenses/recode/f45ee1c765646813b442ca58de72e20a64a7ddba || :
 pushd ../buildavx2/
 %make_install_v3
 popd
