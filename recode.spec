@@ -4,7 +4,7 @@
 #
 Name     : recode
 Version  : 3.7.12
-Release  : 17
+Release  : 18
 URL      : https://github.com/rrthomas/recode/releases/download/v3.7.12/recode-3.7.12.tar.gz
 Source0  : https://github.com/rrthomas/recode/releases/download/v3.7.12/recode-3.7.12.tar.gz
 Summary  : No detailed summary available
