@@ -1,6 +1,9 @@
 Configure miss: __fseterr
 Configure miss: __fseterr
 Configure miss: __fseterr
+Configure miss: bool, true, false
+Configure miss: bool, true, false
+Configure miss: bool, true, false
 Configure miss: compiler option needed when checking for declarations
 Configure miss: compiler option needed when checking for declarations
 Configure miss: compiler option needed when checking for declarations
@@ -10,6 +13,15 @@ Configure miss: crtdefs.h
 Configure miss: cython3
 Configure miss: cython3
 Configure miss: cython3
+Configure miss: gcc option to enable large file support
+Configure miss: gcc option to enable large file support
+Configure miss: gcc option to enable large file support
+Configure miss: gcc options needed to detect all undeclared functions
+Configure miss: gcc options needed to detect all undeclared functions
+Configure miss: gcc options needed to detect all undeclared functions
+Configure miss: stdckdint.h
+Configure miss: stdckdint.h
+Configure miss: stdckdint.h
 Configure miss: whether -Wno-missing-field-initializers is needed
 Configure miss: whether -Wno-missing-field-initializers is needed
 Configure miss: whether -Wno-missing-field-initializers is needed

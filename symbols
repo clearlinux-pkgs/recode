@@ -2,6 +2,7 @@ librecode.so.3:__gl_setmode
 librecode.so.3:__xargmatch_internal
 librecode.so.3:_gl_alloc_nomem
 librecode.so.3:argmatch
+librecode.so.3:argmatch_exact
 librecode.so.3:argmatch_invalid
 librecode.so.3:argmatch_to_argument
 librecode.so.3:argmatch_valid
@@ -53,7 +54,6 @@ librecode.so.3:get_stat_ctime_ns
 librecode.so.3:get_stat_mtime
 librecode.so.3:get_stat_mtime_ns
 librecode.so.3:getprogname
-librecode.so.3:gl_scratch_buffer_dupfree
 librecode.so.3:gl_scratch_buffer_grow
 librecode.so.3:gl_scratch_buffer_grow_preserve
 librecode.so.3:gl_scratch_buffer_set_array_size
