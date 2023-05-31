@@ -5,7 +5,7 @@
 #
 Name     : recode
 Version  : 3.7.14
-Release  : 20
+Release  : 21
 URL      : https://github.com/rrthomas/recode/releases/download/v3.7.14/recode-3.7.14.tar.gz
 Source0  : https://github.com/rrthomas/recode/releases/download/v3.7.14/recode-3.7.14.tar.gz
 Summary  : No detailed summary available
@@ -114,7 +114,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683311598
+export SOURCE_DATE_EPOCH=1685509815
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -158,7 +158,7 @@ cd ../buildavx512;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1683311598
+export SOURCE_DATE_EPOCH=1685509815
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/recode
 cp %{_builddir}/recode-%{version}/COPYING %{buildroot}/usr/share/package-licenses/recode/8624bcdae55baeef00cd11d5dfcfa60f68710a02 || :
@@ -185,8 +185,6 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/librecode.so
-/V4/usr/lib64/librecode.so
 /usr/include/recode.h
 /usr/include/recodext.h
 /usr/lib64/librecode.so
@@ -197,9 +195,7 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/librecode.so.3
 /V3/usr/lib64/librecode.so.3.7.14
-/V4/usr/lib64/librecode.so.3
 /V4/usr/lib64/librecode.so.3.7.14
 /usr/lib64/librecode.so.3
 /usr/lib64/librecode.so.3.7.14
